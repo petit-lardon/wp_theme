@@ -33,7 +33,7 @@ function folio_add_admin_page() {
 add_action('admin_menu', 'folio_add_admin_page');
 
 function myfolio_theme_create_page() {
-    echo '<h1>MyFolio settings page</h1>';
+    require_once(get_template_directory().'/inc/templates/myFolio-admin.php');
 }
 
 function myfolio_theme_css_page() {
