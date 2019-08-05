@@ -1,6 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
+ * @package myFolioTheme
  * User: jlavie
  * Date: 04/08/2019
  * Time: 16:22
