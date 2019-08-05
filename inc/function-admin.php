@@ -47,10 +47,17 @@ function myfolio_theme_css_page() {
 
 function myfolio_custom_settings() {
     register_setting('myfolio_settings_group', 'first_name');
+    register_setting('myfolio_settings_group', 'last_name');
+    register_setting('myfolio_settings_group', 'user_description');
+    register_setting('myfolio_settings_group', 'twitter_link', 'myfolio_twitter_sanitize');
+    register_setting('myfolio_settings_group', 'facebook_link');
 
     add_settings_section('myfolio-sidebar-options', 'Sidebar options', 'myfolio_sidebar_options', 'myfolio');
 
-    add_settings_field('sidebar-name', 'First name', 'myfolio_sidebar_name', 'myfolio', 'myfolio-sidebar-options');
+    add_settings_field('sidebar-name', 'Full name', 'myfolio_sidebar_name', 'myfolio', 'myfolio-sidebar-options');
+    add_settings_field('sidebar-user-description', 'User description', 'myfolio_sidebar_user_description', 'myfolio', 'myfolio-sidebar-options');
+    add_settings_field('sidebar-twitter', 'Twitter', 'myfolio_sidebar_twitter', 'myfolio', 'myfolio-sidebar-options');
+    add_settings_field('sidebar-facebook', 'Facebook', 'myfolio_sidebar_facebook', 'myfolio', 'myfolio-sidebar-options');
 }
 
 function myfolio_sidebar_options() {
@@ -59,5 +66,30 @@ function myfolio_sidebar_options() {
 
 function myfolio_sidebar_name() {
     $firstName = esc_attr(get_option('first_name'));
+    $lastName = esc_attr(get_option('last_name'));
     echo '<input type="text" name="first_name" value="'.$firstName.'" placeholder="first name" />';
+    echo '<input type="text" name="last_name" value="'.$lastName.'" placeholder="last name" />';
+}
+
+function myfolio_sidebar_user_description() {
+    $userDescription = esc_attr(get_option('user_description'));
+    echo '<input type="text" name="user_description" value="'.$userDescription.'" placeholder="little description" />';
+}
+
+function myfolio_sidebar_twitter() {
+    $twitter = esc_attr(get_option('twitter_link'));
+    echo '<input type="text" name="twitter_link" value="'.$twitter.'" placeholder="Twitter" />
+    <p class="description">Input your Twitter username without @</p>';
+}
+
+function myfolio_sidebar_facebook() {
+    $facebook = esc_attr(get_option('facebook_link'));
+    echo '<input type="text" name="facebook_link" value="'.$facebook.'" placeholder="Facebook" />';
+}
+
+function myfolio_twitter_sanitize($input) {
+    //strip html
+    $output = sanitize_text_field($input);
+    $output = str_replace('@', '', $output);
+    return$output;
 }
