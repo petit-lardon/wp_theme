@@ -18,6 +18,15 @@
   .myfolio__preview__sidebar {
     display: block;
     text-align: center; }
+    .myfolio__preview__sidebar__profile__image {
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 20px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover; }
     .myfolio__preview__sidebar__username, .myfolio__preview__sidebar__description {
       font-weight: 100;
       color: #ffffff; }

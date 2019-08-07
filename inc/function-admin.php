@@ -68,7 +68,7 @@ function myfolio_sidebar_options() {
 
 function myfolio_sidebar_profile_picture() {
     $picture = esc_attr(get_option('profile_picture'));
-    echo '<input class="button button-secondary" type="button" id="upload-button" value="Upload profile picture" /><input type="hidden" name="profile_picture" value="'.$picture.'" />';
+    echo '<input class="button button-secondary" type="button" id="upload-button" value="Upload profile picture" /><input type="hidden" id="profile-picture" name="profile_picture" value="'.$picture.'" />';
 }
 
 function myfolio_sidebar_name() {

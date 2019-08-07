@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
     var mediaUploader;
 
-    $('#upload-button').click(function(e) {
+    $('#upload-button').on('click', function(e) {
         e.preventDefault();
 
         if(mediaUploader) {
@@ -16,5 +16,14 @@ jQuery(document).ready(function($) {
             },
             multiple: false
         });
+
+        mediaUploader.on('select', function() {
+            attachment = mediaUploader.state().get('selection').first().toJSON();
+            $('#profile-picture').val(attachment.url);
+            $('#profile-picture-preview').css('background-image', 'url('+attachment.url+')');
+
+        });
+
+        mediaUploader.open();
     });
 });
