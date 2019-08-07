@@ -46,6 +46,7 @@ function myfolio_theme_css_page() {
 }
 
 function myfolio_custom_settings() {
+    register_setting('myfolio_settings_group', 'profile_picture');
     register_setting('myfolio_settings_group', 'first_name');
     register_setting('myfolio_settings_group', 'last_name');
     register_setting('myfolio_settings_group', 'user_description');
@@ -54,6 +55,7 @@ function myfolio_custom_settings() {
 
     add_settings_section('myfolio-sidebar-options', 'Sidebar options', 'myfolio_sidebar_options', 'myfolio');
 
+    add_settings_field('sidebar-profile-picture', 'My picture', 'myfolio_sidebar_profile_picture', 'myfolio', 'myfolio-sidebar-options');
     add_settings_field('sidebar-name', 'Full name', 'myfolio_sidebar_name', 'myfolio', 'myfolio-sidebar-options');
     add_settings_field('sidebar-user-description', 'User description', 'myfolio_sidebar_user_description', 'myfolio', 'myfolio-sidebar-options');
     add_settings_field('sidebar-twitter', 'Twitter', 'myfolio_sidebar_twitter', 'myfolio', 'myfolio-sidebar-options');
@@ -62,6 +64,11 @@ function myfolio_custom_settings() {
 
 function myfolio_sidebar_options() {
     echo 'Customize your sidebar informations';
+}
+
+function myfolio_sidebar_profile_picture() {
+    $picture = esc_attr(get_option('profile_picture'));
+    echo '<input class="button button-secondary" type="button" id="upload-button" value="Upload profile picture" /><input type="hidden" name="profile_picture" value="'.$picture.'" />';
 }
 
 function myfolio_sidebar_name() {
