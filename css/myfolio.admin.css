@@ -1,0 +1,40 @@
+/**
+ * @package myFolioTheme
+ * User: jlavie
+ *
+ * ====================
+ * ADMIN PAGE CSS
+ * ====================
+ */
+.myfolio__preview, .myfolio__form {
+  display: inline-block;
+  float: left; }
+.myfolio__preview {
+  width: 280px;
+  background-color: #1f1f1f;
+  padding: 15px;
+  text-align: center;
+  margin-right: 15px; }
+  .myfolio__preview__sidebar {
+    display: block;
+    text-align: center; }
+    .myfolio__preview__sidebar__profile__image {
+      width: 150px;
+      height: 150px;
+      overflow: hidden;
+      border-radius: 50%;
+      margin: 20px auto;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover; }
+    .myfolio__preview__sidebar__username, .myfolio__preview__sidebar__description {
+      font-weight: 100;
+      color: #ffffff; }
+    .myfolio__preview__sidebar__username {
+      font-size: 23px;
+      margin: 0 0 10px; }
+    .myfolio__preview__sidebar__description {
+      font-size: 13px;
+      margin: 0 0 20px; }
+
+/*# sourceMappingURL=myfolio.admin.css.map */
