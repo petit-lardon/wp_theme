@@ -30,7 +30,7 @@
     <?php
         settings_fields('myfolio_settings_group');
         do_settings_sections('myfolio');
-        submit_button();
+        submit_button('Save', 'primary-button', 'btnSubmit');
     ?>
 </form>
 <?php bloginfo(); ?>

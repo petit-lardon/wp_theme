@@ -26,4 +26,17 @@ jQuery(document).ready(function($) {
 
         mediaUploader.open();
     });
+
+    $('#remove-picture').on('click', function(e) {
+        e.preventDefault();
+
+        var answer = confirm("Remove profile picture ?");
+
+        if(answer == true) {
+
+            $('#profile-picture').val('');
+            $('.myfolio__form').submit()
+        }
+        return;
+    });
 });
