@@ -70,11 +70,13 @@ function myfolio_custom_settings() {
     // THEME SUPPORT OPTIONS
     register_setting('myfolio_theme_support', 'post_formats', 'myfolio_post_formats_callback');
     register_setting('myfolio_theme_support', 'custom_header');
+    register_setting('myfolio_theme_support', 'custom_background');
 
     add_settings_section('myfolio-theme-options', 'Theme options', 'myfolio_theme_options', 'myfolio_theme_support_page');
 
     add_settings_field('post-formats', 'Post formats', 'myfolio_post_formats', 'myfolio_theme_support_page', 'myfolio-theme-options');
     add_settings_field('custom-header', 'Custom header', 'myfolio_custom_header', 'myfolio_theme_support_page', 'myfolio-theme-options');
+    add_settings_field('custom-background', 'Custom background', 'myfolio_custom_background', 'myfolio_theme_support_page', 'myfolio-theme-options');
 }
 
 function myfolio_sidebar_options() {
@@ -146,4 +148,10 @@ function myfolio_custom_header() {
     $options = get_option('custom_header');
     $checked = ($options == 1 ? 'checked' : '');
     echo '<label><input type="checkbox" id="custom_header" name="custom_header" value="1" '.$checked.' />Activate the custom header</label>';
+}
+
+function myfolio_custom_background() {
+    $options = get_option('custom_background');
+    $checked = ($options == 1 ? 'checked' : '');
+    echo '<label><input type="checkbox" id="custom_background" name="custom_background" value="1" '.$checked.' />Activate the custom background</label>';
 }

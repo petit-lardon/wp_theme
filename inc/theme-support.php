@@ -12,6 +12,7 @@
 
 $options = get_option('post_formats');
 $header = get_option('custom_header');
+$background = get_option('custom_background');
 
 $formats =  array('aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat');
 $output = array();
@@ -26,4 +27,8 @@ if(!empty($options)) {
 
 if(@$header == 1) {
     add_theme_support('custom-header');
+}
+
+if(@$background == 1) {
+    add_theme_support('custom-background');
 }
