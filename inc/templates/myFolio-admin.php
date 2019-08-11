@@ -1,4 +1,4 @@
-<h1>MyFolio settings page</h1>
+<h1>MyFolio sidebar</h1>
 <?php
     settings_errors();
 

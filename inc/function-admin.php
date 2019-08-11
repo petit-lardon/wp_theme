@@ -19,7 +19,7 @@ function folio_add_admin_page() {
     //$icon_url = get_template_directory_uri().'/image/folio-icon.png';
     $icon_url = 'dashicons-schedule';       //Chemin de l'icone utilisée dans le menu
     $position = 110;                        //Position du module dans la liste des options dans le BO
-    $sub_menu_settings = 'settings';
+    $sub_menu_settings = 'Sidebar';
     $sub_menu_css = 'css';
     $sub_menu_css_function = 'myfolio_theme_css_page';
 
@@ -28,6 +28,7 @@ function folio_add_admin_page() {
     add_menu_page($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, $position);
 
     add_submenu_page($menu_slug, $menu_title, $sub_menu_settings, $capability, $menu_slug,$function);
+    add_submenu_page($menu_slug, 'MyFolio theme options', 'Theme options', $capability, $menu_slug.'_theme','myfolio_theme_support_page');
     add_submenu_page($menu_slug, $menu_title.' '.$sub_menu_css, $sub_menu_css, $capability, $menu_slug.'_'.$sub_menu_css,$sub_menu_css_function);
 
     //action dans la création de la page. si page pas créée, la fonction suivante ne sera pas appelée
@@ -36,6 +37,10 @@ function folio_add_admin_page() {
 
 //afficher notre page dans l'admin menu
 add_action('admin_menu', 'folio_add_admin_page');
+
+function myfolio_theme_support_page() {
+    require_once(get_template_directory().'/inc/templates/myFolio-theme-support.php');
+}
 
 function myfolio_theme_create_page() {
     require_once(get_template_directory().'/inc/templates/myFolio-admin.php');
@@ -46,6 +51,7 @@ function myfolio_theme_css_page() {
 }
 
 function myfolio_custom_settings() {
+    // SIDEBAR OPTIONS
     register_setting('myfolio_settings_group', 'profile_picture');
     register_setting('myfolio_settings_group', 'first_name');
     register_setting('myfolio_settings_group', 'last_name');
@@ -60,6 +66,13 @@ function myfolio_custom_settings() {
     add_settings_field('sidebar-user-description', 'User description', 'myfolio_sidebar_user_description', 'myfolio', 'myfolio-sidebar-options');
     add_settings_field('sidebar-twitter', 'Twitter', 'myfolio_sidebar_twitter', 'myfolio', 'myfolio-sidebar-options');
     add_settings_field('sidebar-facebook', 'Facebook', 'myfolio_sidebar_facebook', 'myfolio', 'myfolio-sidebar-options');
+
+    // THEME SUPPORT OPTIONS
+    register_setting('myfolio_theme_support', 'post_formats', 'myfolio_post_formats_callback');
+
+    add_settings_section('myfolio-theme-options', 'Theme options', 'myfolio_theme_options', 'myfolio_theme_support_page');
+
+    add_settings_field('post-formats', 'Post formats', 'myfolio_post_formats', 'myfolio_theme_support_page', 'myfolio-theme-options');
 }
 
 function myfolio_sidebar_options() {
@@ -99,4 +112,22 @@ function myfolio_twitter_sanitize($input) {
     $output = sanitize_text_field($input);
     $output = str_replace('@', '', $output);
     return$output;
+}
+
+function myfolio_post_formats_callback($input) {
+    return $input;
+}
+
+function myfolio_theme_options() {
+    echo 'Activate and deactivate';
+}
+
+function myfolio_post_formats() {
+    $formats =  array('aside', 'gallery', 'link', 'iamage', 'quote', 'status', 'video', 'audio', 'chat');
+    $output = '';
+
+    foreach ($formats as $format) {
+        $output .= '<label><input type="checkbox" id="'.$format.'" name="'.$format.'" value="1" />'.$format.'</label><br />';
+    }
+    echo $output;
 }
